@@ -15,13 +15,16 @@ import { MatInputModule } from '@angular/material/input';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    EventsPageComponent
+    EventsPageComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
+    MatSnackBarModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}

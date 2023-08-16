@@ -1,4 +1,6 @@
 <p *ngFor="let item of events | async">
     {{ item.startDate }}: {{ item.name }}
   </p>
+  <a *ngIf="isAdmin()" class="nav-item nav-link" routerLink="/admin">go to </a>
+  <br />
   <button mat-raised-button color="primary" (click)="logout()">Logout</button>

@@ -11,10 +11,10 @@ const routes: Routes = [
   {
     path: '',
     component: EventsPageComponent,
-    canActivate: [AuthGuard],
-    data: {
-      roles: [Role.User, Role.Admin]
-    }
+    // canActivate: [AuthGuard],
+    // data: {
+    //   roles: [Role.User, Role.Admin]
+    // }
   },
   {
     path: 'admin',

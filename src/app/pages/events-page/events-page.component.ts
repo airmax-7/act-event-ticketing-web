@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { EventClient } from 'src/app/common/clients/eventClient';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
 import {Role} from 'src/app/common/enums/role.enum'
+import { EventService } from 'src/app/common/services/event.service';
+import { FormControl } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
+import { Event } from 'src/app/common/models/event.model';
 
 @Component({
   selector: 'app-events-page',
@@ -10,14 +12,42 @@ import {Role} from 'src/app/common/enums/role.enum'
   styleUrls: ['./events-page.component.scss']
 })
 export class EventsPageComponent implements OnInit{
-  public events: Observable<any> = this.eventClient.getEvents();
-  
+  events: Event[] | undefined;
+  selectedEvent: Event | undefined;
+  filteredEvents : Observable<Event[] | undefined> | undefined;
+
+  filter = new FormControl('', {nonNullable: true});
+
   constructor(
     private authenticationService: AuthenticationService,
-    private eventClient: EventClient
-  ) {}
+    private eventService: EventService
+  ) {  }
 
-  ngOnInit(): void {}
+  async ngOnInit() {
+    this.events = await this.eventService.getEvents();
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.events = changes['events'].currentValue;
+
+    this.filteredEvents = this.filter.valueChanges.pipe(
+      startWith(''),
+      map(text => this.search(text, this.events))
+    );
+  }
+
+  search(text: string, events: Event[] | undefined): Event[] | undefined {
+    if (!events) {
+      return;
+    }
+
+    return events.filter(e => {
+      const term = text.toLowerCase();
+      return e.name.toLowerCase().includes(term)
+          || e.venue.toLowerCase().includes(term);
+    });
+  }
 
   isAdmin(): boolean {
     const user = this.authenticationService.getUser();

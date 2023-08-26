@@ -14,3 +14,7 @@ justify-content: center;
 margin: 10px;
 max-width: 300px;
 }
+
+.mat-card-image, mat-card-title{
+    cursor: pointer;
+}

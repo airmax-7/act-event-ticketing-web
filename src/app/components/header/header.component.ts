@@ -38,4 +38,8 @@ export class HeaderComponent {
   logout(): void {
     this.authenticationService.logout();
   }
+
+  goToEvents(): void{
+    this.router.navigate(['/events']);
+  }
 }

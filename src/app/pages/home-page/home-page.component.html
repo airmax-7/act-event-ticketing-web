@@ -1,4 +1,7 @@
 <app-header></app-header>
-<h1>Looking for an event in town?</h1>
-<h3>Find it here</h3>
-<app-events-list [events]="events"></app-events-list>
+<div class="home-banner">
+    <h3 class="text-center">Find it here</h3>
+    <h1 class="text-center">Looking for an event in town?</h1>
+</div>
+<h1 class="title text-center py-10">Upcoming Events</h1>
+<app-events-list [events]="events" (openDetailsEventEmitter)="openDetails($event)"></app-events-list>

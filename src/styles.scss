@@ -11,3 +11,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .block{
     display: block;
 }
+
+.search-form-field{
+    flex-direction: inherit !important;
+}
+
+.title{
+    font-weight: bold;
+    color: #c21500;
+}
+
+.py-10{
+    padding: 50px;
+}
+
+.text-highlight{
+    color: #c21500;
+}
+
+.text-mute{
+    color: darkgray;
+}

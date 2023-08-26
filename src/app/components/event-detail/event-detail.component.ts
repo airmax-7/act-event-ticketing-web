@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { LocalStorageConstants } from 'src/app/common/constants/constants';
 import { Event } from 'src/app/common/models/event.model';
 import { YenePayCheckout } from 'src/app/common/models/payment-methods/YenePay/yenepay.checkout.model';
@@ -39,7 +40,7 @@ export class EventDetailComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  redirectToPayment(){
+  async redirectToPayment(){
     //create checkout model
     var checkoutModel = new YenePayCheckout();
     checkoutModel.Process="Express";
@@ -56,6 +57,10 @@ export class EventDetailComponent implements OnInit {
     checkoutModel.Items = [item];
 
     //get checkouturl
-    this.checkoutService.checkout(checkoutModel);
+    this.checkoutService.getCheckoutUrl(checkoutModel)
+    .then(
+      (url)=>window.location.href = url
+      );
   }
 }
+

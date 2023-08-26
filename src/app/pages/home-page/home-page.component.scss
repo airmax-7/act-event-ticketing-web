@@ -1,0 +1,9 @@
+.home-banner{
+    background-size: cover;
+    background-position: center;
+    background-image: url('../../../assets/images/home-banner.jpg');
+    color: white;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column-reverse;
+}

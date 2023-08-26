@@ -4,6 +4,7 @@ import { CheckoutClient } from "../clients/checkoutClient";
 import { YenePayCheckout } from "../models/payment-methods/YenePay/yenepay.checkout.model";
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Observable, firstValueFrom } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -15,16 +16,18 @@ export class CheckoutService {
         private router: Router,
         private snackBar: MatSnackBar) { }
     
-    public checkout(checkoutModel: YenePayCheckout): void {
-        this.checkoutClient.getCheckoutUrl(checkoutModel)
-          .subscribe({
-            next: (result) => {
-              this.handleGetCheckoutSuccess(result);
-            },
-            error: (error: HttpErrorResponse) => {
-              this.handleGetCheckoutFail(error);
-            }
-          });
+    public async getCheckoutUrl(checkoutModel: YenePayCheckout): Promise<string>{
+        return await firstValueFrom(this.checkoutClient.getCheckoutUrl(checkoutModel));
+          // .subscribe({
+          //   next: (result: string) => {
+          //     //this.handleGetCheckoutSuccess(result);
+          //     return result;
+          //   },
+          //   error: (error: HttpErrorResponse) => {
+          //     //this.handleGetCheckoutFail(error);
+          //     return "";
+          //   }
+          // });
     }
 
     private handleGetCheckoutSuccess(result: string): void {

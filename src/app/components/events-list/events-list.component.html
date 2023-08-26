@@ -6,17 +6,18 @@
     </mat-card-content>
   </mat-card> -->
 <div class="events-card-container">
-  <mat-card class="event-card" *ngFor="let event of events" (click)="selectEvent(event)">
+  <mat-card class="event-card" *ngFor="let event of events" >
+    
+    <img class="mat-card-image" mat-card-image src="../../../assets/event-posters/{{event.posterImage}}" alt="Event poster" (click)="selectEvent(event)">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{ event.name }}</mat-card-title>
-      <mat-card-subtitle>{{event.eventCode}}</mat-card-subtitle>
+      <!-- <div mat-card-avatar class="example-header-image"></div> -->
+      <mat-card-title (click)="selectEvent(event)">{{ event.name }}</mat-card-title>
+      <!-- <mat-card-subtitle>{{event.eventCode}}</mat-card-subtitle> -->
     </mat-card-header>
-    <img mat-card-image src={{event.posterImage}} alt="Event poster">
     <mat-card-content>
-      <p>{{ event.startDate }}</p>
-      <p>{{event.venue}}</p>
-      <p>{{event.organizer.name}}</p>
+      <p class="text-highlight">{{ event.startDate }}</p>
+      <p class="text-mute">{{event.venue}}</p>
+      <b>{{event.organizer.name}}</b>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button>LIKE</button>

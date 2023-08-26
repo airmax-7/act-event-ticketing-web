@@ -1,18 +1,36 @@
 <div class="container">
-    <img src={{selectedEvent?.posterImage}} alt="Event poster">
-    <h1>{{selectedEvent?.name}}</h1>
-    <b>{{selectedEvent?.organizer?.name}}</b>
-    <h3>Time and Venue</h3>
-    <span>{{selectedEvent?.startDate}}</span><span>{{selectedEvent?.venue}}</span>
-    <h3>About Event</h3>
-    <p>{{selectedEvent?.description}}</p>
-    <h3>AvailableTickets</h3>
-    <div *ngFor="let element of selectedEvent?.eventTickets">
-        <span>{{element.priceCategory}}</span>
-        <span>{{element.price}}</span>
-        <input type="number" value="{{selectedTicketQty}}">
-    </div>
 
-    <button *ngIf="!isUserLoggedIn() && selectedEvent?.eventTickets?.length !== 0" mat-button color="primary" (click)="loginToBuy()">Login to buy</button>
-    <button *ngIf="isUserLoggedIn() && selectedEvent?.eventTickets?.length !== 0" mat-raised-button color="primary" (click)="redirectToPayment()">Buy now</button>
-</div>
+    <mat-card class="event-card" >
+    
+        <img class="mat-card-image" mat-card-image src="../../../assets/event-posters/{{selectedEvent?.posterImage}}" alt="Event poster">
+        <mat-card-header>
+          <!-- <div mat-card-avatar class="example-header-image"></div> -->
+          <mat-card-title>{{ selectedEvent?.name }}</mat-card-title>
+          <mat-card-subtitle>Organizer: {{selectedEvent?.organizer?.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="event-detail">
+                <h3><b>Date and Time</b></h3>
+                <p class="">{{ selectedEvent?.startDate }}</p>
+                <h3><b>Location</b></h3>
+                <p class="">{{selectedEvent?.venue}}</p>
+                <h3><b>About Event</b></h3>
+                <p>{{selectedEvent?.description}}</p>
+            </div>
+            <div class="event-ticket">
+                <h2><b>AvailableTickets</b></h2>
+                <div *ngFor="let element of selectedEvent?.eventTickets">
+                    <b>{{element.priceCategory}}</b><br/>
+                    <h2 class="text-highlight">ETB {{element.price}}</h2>
+                    <mat-form-field>
+                        <input matInput type="number" value="{{selectedTicketQty}}">
+                    </mat-form-field>
+                </div>
+
+                <button *ngIf="!isUserLoggedIn() && selectedEvent?.eventTickets?.length !== 0" mat-button color="primary" (click)="loginToBuy()">Login to buy</button>
+                <button *ngIf="isUserLoggedIn() && selectedEvent?.eventTickets?.length !== 0" mat-raised-button color="primary" (click)="redirectToPayment()">Buy now</button>
+            </div>
+        </mat-card-content>
+      </mat-card>
+
+    </div>

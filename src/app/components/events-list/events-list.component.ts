@@ -5,6 +5,7 @@ import { Role } from 'src/app/common/enums/role.enum';
 import { AuthenticationService } from 'src/app/common/services/authentication.service';
 import { EventService } from 'src/app/common/services/event.service';
 import { Event } from 'src/app/common/models/event.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-events-list',
@@ -19,6 +20,8 @@ export class EventsListComponent implements OnInit{
   filteredEvents : Event[] | undefined;
 
   filter = new FormControl('', {nonNullable: true});
+
+  posterImageBaseUrl = environment.apiUrl + '/assets/event-posters/';
 
   constructor(
     private authenticationService: AuthenticationService,

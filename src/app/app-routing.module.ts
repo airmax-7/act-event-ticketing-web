@@ -6,15 +6,25 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { Role } from './common/enums/role.enum';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: EventsPageComponent,
+    component: HomePageComponent,
     // canActivate: [AuthGuard],
     // data: {
     //   roles: [Role.User, Role.Admin]
     // }
+  },
+  {
+    path: 'events',
+    component: EventsPageComponent
+  },
+  {
+    path: 'events/details',
+    component: EventsPageComponent,
+    pathMatch: 'prefix'
   },
   {
     path: 'admin',

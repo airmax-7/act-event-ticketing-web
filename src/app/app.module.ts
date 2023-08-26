@@ -17,6 +17,13 @@ import { EventsPageComponent } from './pages/events-page/events-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { EventsListComponent } from './components/events-list/events-list.component';
+import { EventDetailComponent } from './components/event-detail/event-detail.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,11 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     LoginPageComponent,
     RegisterPageComponent,
     EventsPageComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    EventsListComponent,
+    HomePageComponent,
+    EventDetailComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +50,9 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
     MatCardModule,
     MatInputModule,
     MatSnackBarModule,
+    MatToolbarModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}

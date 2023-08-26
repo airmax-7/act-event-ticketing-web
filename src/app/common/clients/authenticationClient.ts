@@ -4,6 +4,8 @@ import { HttpClient } from "@angular/common/http";
 import {Injectable} from '@angular/core'
 import { Observable } from "rxjs";
 import { Result } from '../models/result.model';
+import { User } from '../models/user.model';
+import { ApplicationUser } from '../models/application-user.model';
 
 @Injectable({
     providedIn: 'root',
@@ -22,18 +24,11 @@ export class AuthenticationClient{
         );
     }
 
-    public register(
-        username: string,
-        email: string,
-        password: string
+    public register(user: ApplicationUser
       ): Observable<Result<string>> {
         return this.http.post<Result<string>>(
           environment.apiUrl + '/user/register',
-          {
-            username: username,
-            email: email,
-            password: password,
-          },
+          user,
         );
       }
 }

@@ -5,6 +5,7 @@ import { EventService } from 'src/app/common/services/event.service';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Event } from 'src/app/common/models/event.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-events-page',
@@ -17,15 +18,25 @@ export class EventsPageComponent implements OnInit{
   filteredEvents : Observable<Event[] | undefined> | undefined;
 
   filter = new FormControl('', {nonNullable: true});
+  detailsMode = false;
 
   constructor(
     private authenticationService: AuthenticationService,
-    private eventService: EventService
+    private eventService: EventService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {  }
 
   async ngOnInit() {
     this.events = await this.eventService.getEvents();
-
+    if (this.router.url.includes('details')) {
+      this.route.queryParams.subscribe(params => {
+        this.selectedEvent = this.events?.find(event => event.eventCode.toString() === params['eventCode']);
+        if (this.selectedEvent) {
+          this.detailsMode = true;
+        }
+      });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -35,6 +46,10 @@ export class EventsPageComponent implements OnInit{
       startWith(''),
       map(text => this.search(text, this.events))
     );
+  }
+
+  openDetails(selectedEvent: Event) {
+    this.router.navigate(['events/details'], { queryParams: { eventCode: selectedEvent.eventCode } });
   }
 
   search(text: string, events: Event[] | undefined): Event[] | undefined {

@@ -1,0 +1,50 @@
+<!-- <mat-card>
+    <mat-card-content>
+      <mat-form-field>
+        <input matInput placeholder="Search..." [formControl]="filter" />
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card> -->
+<div class="events-card-container">
+  <mat-card class="event-card" *ngFor="let event of events" (click)="selectEvent(event)">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ event.name }}</mat-card-title>
+      <mat-card-subtitle>{{event.eventCode}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src={{event.posterImage}} alt="Event poster">
+    <mat-card-content>
+      <p>{{ event.startDate }}</p>
+      <p>{{event.venue}}</p>
+      <p>{{event.organizer.name}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+  
+<a *ngIf="isAdmin()" class="nav-item nav-link" routerLink="/admin">go to </a>
+<br />
+
+
+    <!-- product-list.component.html -->
+<!-- <mat-toolbar color="primary">
+    <span>Product List</span>
+    <mat-form-field appearance="outline">
+      <mat-label>Filter</mat-label>
+      <input matInput  placeholder="Type to filter">
+    </mat-form-field>
+  </mat-toolbar> -->
+  
+  <!-- <div class="product-container">
+    <mat-card *ngFor="let product of filteredEvents" class="product-card">
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Price: {{ product.venue }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div> -->

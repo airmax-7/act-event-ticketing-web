@@ -1,0 +1,18 @@
+<div class="container">
+    <img src={{selectedEvent?.posterImage}} alt="Event poster">
+    <h1>{{selectedEvent?.name}}</h1>
+    <b>{{selectedEvent?.organizer?.name}}</b>
+    <h3>Time and Venue</h3>
+    <span>{{selectedEvent?.startDate}}</span><span>{{selectedEvent?.venue}}</span>
+    <h3>About Event</h3>
+    <p>{{selectedEvent?.description}}</p>
+    <h3>AvailableTickets</h3>
+    <div *ngFor="let element of selectedEvent?.eventTickets">
+        <span>{{element.priceCategory}}</span>
+        <span>{{element.price}}</span>
+        <input type="number" value="{{selectedTicketQty}}">
+    </div>
+
+    <button *ngIf="!isUserLoggedIn() && selectedEvent?.eventTickets?.length !== 0" mat-button color="primary" (click)="loginToBuy()">Login to buy</button>
+    <button *ngIf="isUserLoggedIn() && selectedEvent?.eventTickets?.length !== 0" mat-raised-button color="primary" (click)="redirectToPayment()">Buy now</button>
+</div>

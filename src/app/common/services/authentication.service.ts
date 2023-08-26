@@ -10,6 +10,8 @@ import { Result } from '../models/result.model';
 import jwtDecode from "jwt-decode";
 import { User } from '../models/user.model';
 import { Claims } from '../enums/claims.enum';
+import { LocalStorageConstants } from '../constants/constants';
+import { ApplicationUser } from '../models/application-user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -36,8 +38,8 @@ export class AuthenticationService {
       })
   };
 
-  public register(username: string, email: string, password: string): void {
-    this.authenticationClient.register(username, email, password)
+  public register(user: ApplicationUser): void {
+    this.authenticationClient.register(user)
       .subscribe({
         next: (result) => {
           this.handleSuccessAuthentication(result);
@@ -92,7 +94,15 @@ export class AuthenticationService {
       )
       localStorage.setItem(this.userKey, JSON.stringify(user));
 
-      this.router.navigate(['/']);
+      var lastUrl = localStorage.getItem(LocalStorageConstants.lastVisitUrl);
+      if(lastUrl){
+        localStorage.removeItem(LocalStorageConstants.lastVisitUrl);
+        var urlParts = lastUrl.split('?');
+        this.router.navigate([urlParts[0]]);
+      }
+      else{
+        this.router.navigate(['/']);
+      }
       message = 'User has been authenticated.';
     } else if (result !== null && !result.isSuccess) {
       message = result.errors.join(' ');

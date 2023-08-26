@@ -1,0 +1,14 @@
+<mat-toolbar color="">
+    <mat-form-field appearance="outline">
+        <input matInput  placeholder="Search for event">
+    </mat-form-field>
+    <span class="navbar-spacer"></span>
+    <div class="navbar-menu-item-container">
+        <button mat-button class="navbar-menu-item" aria-label="Example icon-button with menu icon">Find Events</button>
+        <button mat-stroked-button *ngIf="!isLoggedIn()" color="primary" class="navbar-menu-item" (click)="login()">Login</button>
+        <button mat-raised-button *ngIf="!isLoggedIn()" color="primary" class="navbar-menu-item" (click)="register()">Register</button>
+        <span *ngIf="isLoggedIn()">Welcome {{loggedInUser?.name}}!</span>
+        <button mat-raised-button *ngIf="isLoggedIn()" color="primary" (click)="logout()">Logout</button>
+
+    </div>
+</mat-toolbar>

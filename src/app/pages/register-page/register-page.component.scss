@@ -7,3 +7,7 @@
 .authentication-card-container {
     min-height: 100vh;
 }
+
+mat-card-header.block mat-card-title{
+    display: block;
+}
